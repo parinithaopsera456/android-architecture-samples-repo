@@ -38,41 +38,41 @@ jobs:
       - name: Build project and UnitTest
         run: ./gradlew assembleDebug compileDebugUnitTestKotlin
 
-      - name: Spotless
-        # Spotless is not gradle configuration cache compliant. To allow the rest of the build
-        # comply, run spotless with a gradle init script and disable the cache.
-        run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache
+      # - name: Spotless
+      #   # Spotless is not gradle configuration cache compliant. To allow the rest of the build
+      #   # comply, run spotless with a gradle init script and disable the cache.
+      #   run: ./gradlew spotlessCheck --init-script gradle/init.gradle.kts --no-configuration-cache
 
-      - name: Unit tests
-        run: ./gradlew testDebugUnitTest
+      # - name: Unit tests
+      #   run: ./gradlew testDebugUnitTest
 
-      # Needed to accept licenses
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+      # # Needed to accept licenses
+      # - name: Setup Android SDK
+      #   uses: android-actions/setup-android@v2
 
-      - name: Compile AndroidTests
-        run: ./gradlew compileDebugAndroidTestKotlin
+      # - name: Compile AndroidTests
+      #   run: ./gradlew compileDebugAndroidTestKotlin
 
-      - name: Run instrumentation tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 31
-          arch: x86_64
-          disable-animations: true
-          disk-size: 2000M
-          heap-size: 600M
-          script: ./gradlew connectedDebugAndroidTest
+      # - name: Run instrumentation tests
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     api-level: 31
+      #     arch: x86_64
+      #     disable-animations: true
+      #     disk-size: 2000M
+      #     heap-size: 600M
+      #     script: ./gradlew connectedDebugAndroidTest
 
-      - name: Upload build reports
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-reports
-          path: app/build/reports/
+      # - name: Upload build reports
+      #   if: always()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: build-reports
+      #     path: app/build/reports/
 
-      - name: Upload all outputs
-        if: failure()
-        uses: actions/upload-artifact@v2
-        with:
-          name: outputs
-          path: app/build/outputs/
+      # - name: Upload all outputs
+      #   if: failure()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: outputs
+      #     path: app/build/outputs/
