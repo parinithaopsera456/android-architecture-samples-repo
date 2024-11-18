@@ -14,7 +14,7 @@ track = 'alpha'  # 'alpha', 'beta', 'production', etc.
 edit_request = service.edits().insert(body={}, packageName=package_name)
 edit = edit_request.execute()
 # Upload APK file
-apk_file_path = 'app/build/outputs/apk/release/*.apk'
+apk_file_path = 'architecture-samples/app/build/outputs/apk/release/*.apk'
 apk_request = service.edits().apks().upload(
     editId=edit['id'],
     packageName=package_name,
